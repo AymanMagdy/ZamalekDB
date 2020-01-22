@@ -4,8 +4,14 @@
 function creat_database () {
     echo "Enter the database name, please!"
     read databaseName;
+    cd $HOME/Zamalek\ Database
     mkdir $databaseName
     echo "The database '$databaseName' has been created."
+}
+
+function list_databases () {
+    cd $HOME/Zamalek\ Database
+    ls
 }
 
 options=("Creat a DB" "List existing databases");
@@ -26,6 +32,10 @@ case $excuteQuery in
     if [ $excuteQuery -eq 1 ]
     then 
         creat_database
+
+    elif [ $excuteQuery -eq 2 ]
+    then 
+        list_databases
     fi
     ;;
 *)
