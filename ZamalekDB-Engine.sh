@@ -9,12 +9,27 @@ function creat_database () {
     echo "The database '$databaseName' has been created."
 }
 
+# Done and tested
 function list_databases () {
     cd $HOME/Zamalek\ Database
     ls
 }
 
-options=("Creat a DB" "List existing databases");
+# Done and tested
+function list_tables () {
+    echo "Enter the needed database to list its tables"
+    cd $HOME/Zamalek\ Database
+    read select_database;
+    cd $select_database > /dev/null 2>&1
+    if [ $? -eq 0 ]
+    then 
+        ls
+    else 
+        echo "The database -> '${select_database}' does not exist."
+    fi
+}
+
+options=("Creat a DB" "List existing databases" "List tables");
 
 optionsLength=${#options[@]};
 
@@ -36,9 +51,13 @@ case $excuteQuery in
     elif [ $excuteQuery -eq 2 ]
     then 
         list_databases
+    
+    elif [ $excuteQuery -eq 3 ]
+    then 
+        list_tables
     fi
     ;;
 *)
-    echo "Not in the list"
+    echo "Invalid selection."
     ;;
 esac
