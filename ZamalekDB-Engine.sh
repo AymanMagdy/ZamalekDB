@@ -29,7 +29,7 @@ function list_tables () {
     fi
 }
 
-options=("Creat a DB" "List existing databases" "List tables");
+options=("Creat a DB" "List existing databases" "List tables" "Use Database" );
 
 optionsLength=${#options[@]};
 
@@ -55,6 +55,10 @@ case $excuteQuery in
     elif [ $excuteQuery -eq 3 ]
     then 
         list_tables
+    elif [ $excuteQuery -eq 4 ]
+    then 
+        source ./Use-Database.sh
+        echo $?
     fi
     ;;
 *)
