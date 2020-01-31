@@ -1,16 +1,44 @@
 #!/bin/bash
 
 clear
-echo "Enter Database Name : "
+echo "${yellow}Enter Database Name : ${reset}"
 read dbName
 
-cd $HOME/Zamalek\ Database
+function list_table {
+    tableOptions=("Creat table" "Delete Table" "List tables");
+    optionsLength=${#tableOptions[@]};
+    i=0;
+    while [ $i -lt $optionsLength ]
+    do
+        echo $(( $i + 1 ))")" ${tableOptions[i]}
+        i=$(( $i + 1 ))
+    done
+    read excuteQuery;
 
-if [[ -d $dbName ]]
+    case $excuteQuery in 
+        [1-$optionsLength])
+            if [ $excuteQuery -eq 1 ]
+            then 
+                source ./Create-Table.sh 
+            elif [ $excuteQuery -eq 2 ]
+            then 
+                source ./Delete-Table.sh
+            elif [ $excuteQuery -eq 3 ]
+            then 
+                source ./List tables.sh
+            fi
+        ;;
+        *)
+            echo "Invalid selection."
+        ;;
+    esac
+}
+
+if [[ -d data/$dbName ]]
 then 
-    cd $dbName
-    echo "switched to $dbName"
-    source ~/Desktop/projects/ZamalekDB-Engine/Create-Table.sh
+    currentDB=$dbName
+    echo "${green}switched to $dbName ${reset}" 
+    list_table
     return 0;
 else 
     echo "$dbName Not Found"
