@@ -1,19 +1,17 @@
 #!/bin/bash
 
-clear
-echo "Enter Table Name : "
-read tableName
-
-if [[ $tableName =~ [a-zA-Z]+ ]]
-then 
-    if [[ -f data/$currentDB/tables/$tableName ]]
+select choice in `ls data/$currentDB` "return to main menu"
+do 
+    if [[ $choice =~ [a-zA-Z]+ && -d data/$currentDB/$choice ]]
     then 
-        rm data/$currentDB/tables/$tableName
-        rm data/$currentDB/meta-data/$tableName.md
-    else 
-        echo "$tableName not Found"
+        rm data/$currentDB/tables/$choice  
+        rm data/$currentDB/meta-data/$choice  
+        echo "${blue}$choice${green} deleted successfully${reset}" 
+        return 
+    elif [[ $choice =~ [a-zA-Z]+ ]]
+    then 
+        return
+    else
+        echo "${red}Not Found${reset}"
     fi
-else 
-    echo "table name mustn't contains any spaces, numbers or special character"
-
-fi
+done

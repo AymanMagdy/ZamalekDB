@@ -5,7 +5,7 @@ echo "${yellow}Enter Database Name : ${reset}"
 read dbName
 
 function list_table {
-    tableOptions=("Creat table" "Delete Table" "List tables");
+    tableOptions=("Creat table" "Delete Table" "List tables" "View table Content");
     optionsLength=${#tableOptions[@]};
     i=0;
     while [ $i -lt $optionsLength ]
@@ -26,6 +26,9 @@ function list_table {
             elif [ $excuteQuery -eq 3 ]
             then 
                 source ./List tables.sh
+            elif [ $excuteQuery -eq 4 ]
+            then 
+                source ./View-Table-Content.sh
             fi
         ;;
         *)
