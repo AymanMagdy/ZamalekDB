@@ -1,11 +1,25 @@
 #! /bin/bash
 
+currentDB=""
+
+# Colors
+black=`tput setaf 0`
+red=`tput setaf 1`
+green=`tput setaf 2`
+yellow=`tput setaf 3`
+blue=`tput setaf 4`
+magenta=`tput setaf 5`
+cyan=`tput setaf 6`
+white=`tput setaf 7`
+reset=`tput sgr0`
+
+
 # Done and tested
 function creat_database () {
     echo "Enter the database name, please!"
     read databaseName;
-    cd $HOME/Zamalek\ Database
-    mkdir $databaseName
+    mkdir data/$databaseName
+    mkdir data/$currentDB/tables data/$currentDB/meta-data
     echo "The database '$databaseName' has been created."
 }
 
@@ -29,15 +43,15 @@ function list_tables () {
     fi
 }
 
-options=("Creat a DB" "List existing databases" "List tables" "Use Database" );
+options=("Creat a DB" "List existing databases" "List tables" "Use Database" "Delete Table");
 
 optionsLength=${#options[@]};
 
 i=0;
 while [ $i -lt $optionsLength ]
 do
-echo $(( $i + 1 ))")" ${options[i]}
-i=$(( $i + 1 ))
+    echo $(( $i + 1 ))")" ${options[i]}
+    i=$(( $i + 1 ))
 done
 
 read excuteQuery;

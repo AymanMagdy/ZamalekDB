@@ -1,8 +1,8 @@
 #!/bin/bash
 
-clear
-echo "Enter Table Name : "
-read tableName
+#clear
+echo "${yellow}Enter Table Name : ${reset}"
+read -p "${red}$currentDB${blue}/${reset} " tableName
 
 function createColumns {
     typeset -i colNum
@@ -26,7 +26,7 @@ function createColumns {
             record+=$colName
             if [[ $colName =~ [a-zA-Z-]+ ]]
             then
-            select choice in Int String Alphnumeric
+            select choice in Int String Alphanumeric
             do
                 case $choice in 
                 Int)
@@ -38,7 +38,7 @@ function createColumns {
                     break;
                 ;;
                 Alphnumeric)
-                    record+=":Alphnumeric"
+                    record+=":Alphanumeric"
                     break;
                 ;;
                 esac 
@@ -71,9 +71,7 @@ function createColumns {
             else 
                 primaryKeyColumnNum=-1
             fi
-            echo $primaryKeyColumnNum" = "$columnsLength
         done
-
         i=0;
         while [ $i -lt $columnsLength ]
         do
@@ -86,39 +84,22 @@ function createColumns {
             i=$(( $i + 1 ))
         done
 
+        touch data/$currentDB/tables/$tableName
+        touch data/$currentDB/meta-data/$tableName".md"
         i=0;
         while [ $i -lt $columnsLength ]
         do
-            echo $(( $i + 1 ))")" ${colArr[i]}
-            i=$(( $i + 1 ))
-        done
-
-        touch $tableName
-        cd ../meta-data
-        touch $tableName".md"
-
-        i=0;
-        while [ $i -lt $columnsLength ]
-        do
-            echo ${colArr[i]} >> $tableName".md"
+            echo ${colArr[i]} >> data/$currentDB/meta-data/$tableName".md"
             i=$(( $i + 1 ))
         done
     fi 
-    return ;
+    echo "${blue}$tableName${green} is created successfully${reset}"
 }
 
-function chkTablesDir {
-    if test ! -d tables
-    then 
-        mkdir tables meta-data 
-    fi
-    cd tables 
-}
 
 if [[ $tableName =~ [a-zA-Z]+ ]]
 then 
-    chkTablesDir
-    if [[ -f $tableName ]]
+    if [[ -f data/$currentDB/tables/$tableName ]]
     then 
         echo "table is already Exists"
     else 
