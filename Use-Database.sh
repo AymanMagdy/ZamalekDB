@@ -28,7 +28,7 @@ function list_table {
                 source ./List-Tables.sh
             elif [ $excuteQuery -eq 4 ]
             then 
-                source ./View-Table-Content.sh
+                source ./Insert-Data.sh
             elif [ $excuteQuery -eq 5 ]
             then 
                 source ./Delete-Record.sh
