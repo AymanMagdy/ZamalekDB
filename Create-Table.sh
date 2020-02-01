@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#clear
 echo "${yellow}Enter Table Name : ${reset}"
 read -p "${red}$currentDB${blue}/${reset} " tableName
 
@@ -24,27 +23,27 @@ function createColumns {
             read colName
             record=""
             record+=$colName
-            if [[ $colName =~ [a-zA-Z-]+ ]]
+            if [[ $colName =~ [a-zA-Z_-]+ ]]
             then
-            select choice in Int String Alphanumeric
+            select choice in Numbers "alphabet letters" AlphaNumeric
             do
                 case $choice in 
-                Int)
-                    record+=":Int"
+                Numbers)
+                    record+=":Numbers"
                     break
                 ;;
-                String)
-                    record+=":String"
+                "alphabet letters")
+                    record+=":alphabet letters"
                     break;
                 ;;
-                Alphnumeric)
-                    record+=":Alphanumeric"
+                AlphaNumeric)
+                    record+=":AlphaNumeric"
                     break;
                 ;;
                 esac 
             done
             else 
-                echo "Column name must be only characters and -"
+                echo "Column name must be only characters , _ and -"
                 echo "please re enter column name"
                 --i
                 continue
@@ -97,15 +96,15 @@ function createColumns {
 }
 
 
-if [[ $tableName =~ [a-zA-Z]+ ]]
+if [[ $tableName =~ [a-zA-Z_-]+ ]]
 then 
     if [[ -f data/$currentDB/tables/$tableName ]]
     then 
-        echo "table is already Exists"
+        echo "${red}table is already Exists${reset}"
     else 
         createColumns
     fi
 else 
-    echo "table name mustn't contains any spaces, numbers or special character"
+    echo "${yellow}table name mustn't contains any spaces, numbers or special character${reset}"
 
 fi

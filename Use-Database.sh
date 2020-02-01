@@ -47,6 +47,6 @@ then
     list_table
     return 0;
 else 
-    echo "$dbName Not Found"
+    echo "${red}$dbName Not Found${reset}"
     return 1;
 fi
