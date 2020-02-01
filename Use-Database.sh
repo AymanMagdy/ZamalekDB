@@ -25,7 +25,7 @@ function list_table {
                 source ./Delete-Table.sh
             elif [ $excuteQuery -eq 3 ]
             then 
-                source ./List tables.sh
+                source ./List-Tables.sh
             elif [ $excuteQuery -eq 4 ]
             then 
                 source ./View-Table-Content.sh

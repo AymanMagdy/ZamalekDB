@@ -26,7 +26,7 @@ function createColumns {
             record+=$colName
             if [[ $colName =~ [a-zA-Z-]+ ]]
             then
-            select choice in Int String Alphanumeric
+            select choice in Int String Alphnumeric
             do
                 case $choice in 
                 Int)
