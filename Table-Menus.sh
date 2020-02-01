@@ -16,7 +16,7 @@ function table-Function-List {
             if [ $excuteQuery -eq 1 ]
             then 
                 # insert
-                source ./test
+                source ./Insert-Data.sh
             elif [ $excuteQuery -eq 2 ]
             then 
                 # Modify
