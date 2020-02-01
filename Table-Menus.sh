@@ -1,11 +1,7 @@
 #!/bin/bash
 
-clear
-echo "${yellow}Enter Database Name : ${reset}"
-read dbName
-
-function list_table {
-    tableOptions=("Creat table" "Delete Table" "List tables" "Use Table" "Delete Record");
+function table-Function-List {
+    tableOptions=("Insert" "Modify" "Delete" "View Table Content" "Select");
     optionsLength=${#tableOptions[@]};
     i=0;
     while [ $i -lt $optionsLength ]
@@ -19,34 +15,29 @@ function list_table {
         [1-$optionsLength])
             if [ $excuteQuery -eq 1 ]
             then 
-                source ./Create-Table.sh 
+                # insert
+                source ./test
             elif [ $excuteQuery -eq 2 ]
             then 
-                source ./Delete-Table.sh
+                # Modify
+                source ./test
             elif [ $excuteQuery -eq 3 ]
             then 
-                source ./List-Tables.sh
+                source ./Delete-Record.sh
             elif [ $excuteQuery -eq 4 ]
             then 
-                source ./Use-Table.sh
+                source ./View-Table-Content.sh
             elif [ $excuteQuery -eq 5 ]
             then 
-                source ./Delete-Record.sh
+                # select
+                source ./test
             fi
         ;;
         *)
             echo "Invalid selection."
         ;;
     esac
+    table-Function-List
 }
 
-if [[ -d data/$dbName ]]
-then 
-    currentDB=$dbName
-    echo "${green}switched to $dbName ${reset}" 
-    list_table
-    return 0;
-else 
-    echo "${red}$dbName Not Found${reset}"
-    return 1;
-fi
+table-Function-List
