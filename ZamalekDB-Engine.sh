@@ -7,31 +7,39 @@ PS3="${yellow}Enter Your Choice : ${reset}"
 
 
 # Done and tested
-function creat_database () {
+function creatDatabase () {
     echo "Enter the database name, please!"
     read databaseName;
-    mkdir data/$databaseName
-    mkdir data/$databaseName/tables data/$databaseName/meta-data
-    echo "The database '$databaseName' has been created."
+    case $databaseName in 
+    *[A-Za-z])
+        mkdir data/$databaseName > /dev/null 2>&1
+        if [ $? -eq 0 ] 
+        then 
+            mkdir data/$databaseName/tables data/$databaseName/meta-data
+            echo "The database '$databaseName' has been created."
+        else 
+            echo "${red}The database '${databaseName}'' already exists.${reset}"
+        fi
+        ;;
+    *)
+        echo "${red}The name you entered is not a proper name for a database.${reset}"
+        ;;
+    esac
 }
 
 # Done and tested
-function list_databases () {
-    cd $HOME/Zamalek\ Database
-    ls
+function listDatabases () {
+    ls data/
 }
 
 # Done and tested
-function list_tables () {
+function listTables () {
     echo "Enter the needed database to list its tables"
-    cd $HOME/Zamalek\ Database
-    read select_database;
-    cd $select_database > /dev/null 2>&1
-    if [ $? -eq 0 ]
+    if [ -d /data/$currentDB ]
     then 
-        ls
+        ls /data/$currentDB/tables
     else 
-        echo "The database -> '${select_database}' does not exist."
+        echo "The database -> '${currentDB}' does not exist."
     fi
 }
 
@@ -52,15 +60,15 @@ case $excuteQuery in
 [1-$optionsLength])
     if [ $excuteQuery -eq 1 ]
     then 
-        creat_database
+        creatDatabase
 
     elif [ $excuteQuery -eq 2 ]
     then 
-        list_databases
+        listDatabases
     
     elif [ $excuteQuery -eq 3 ]
     then 
-        list_tables
+        listTables
     elif [ $excuteQuery -eq 4 ]
     then 
         source ./Use-Database.sh
