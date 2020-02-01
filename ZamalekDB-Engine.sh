@@ -2,35 +2,9 @@
 
 source ./Color-Variables.sh 
 
+
 currentDB=""
 PS3="${yellow}Enter Your Choice : ${reset}"
-
-
-# Done and tested
-function creatDatabase () {
-    echo "Enter the database name, please!"
-    read databaseName;
-    case $databaseName in 
-    *[A-Za-z])
-        mkdir data/$databaseName > /dev/null 2>&1
-        if [ $? -eq 0 ] 
-        then 
-            mkdir data/$databaseName/tables data/$databaseName/meta-data
-            echo "The database '$databaseName' has been created."
-        else 
-            echo "${red}The database '${databaseName}'' already exists.${reset}"
-        fi
-        ;;
-    *)
-        echo "${red}The name you entered is not a proper name for a database.${reset}"
-        ;;
-    esac
-}
-
-# Done and tested
-function listDatabases () {
-    ls data/
-}
 
 # Done and tested
 function listTables () {
@@ -60,15 +34,15 @@ case $excuteQuery in
 [1-$optionsLength])
     if [ $excuteQuery -eq 1 ]
     then 
-        creatDatabase
+        source ./Creat-Database.sh
 
     elif [ $excuteQuery -eq 2 ]
     then 
-        listDatabases
+        source ./List-Databases.sh
     
     elif [ $excuteQuery -eq 3 ]
     then 
-        listTables
+        source ./List-Tables
     elif [ $excuteQuery -eq 4 ]
     then 
         source ./Use-Database.sh
