@@ -24,7 +24,7 @@ function InsertData () {
                 echo "The id should be integer"
                 ;;
             esac
-        elif [ ${dataType} == "alphabet letters" ]
+        elif [ ${dataType} == "" ]
         then 
             if [ $i -gt 0 ]
             then 
@@ -35,7 +35,7 @@ function InsertData () {
                 data+=$colValue;
                 ;;
             *)
-                echo "The id should be alphabet letters"
+                echo "The value should be string"
                 ;;
             esac
         else

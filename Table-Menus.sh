@@ -20,7 +20,7 @@ function table-Function-List {
             elif [ $excuteQuery -eq 2 ]
             then 
                 # Modify
-                source ./test
+                source ./Update-Table.sh
             elif [ $excuteQuery -eq 3 ]
             then 
                 source ./Delete-Record.sh

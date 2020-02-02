@@ -25,15 +25,15 @@ function createColumns {
             record+=$colName
             if [[ $colName =~ [a-zA-Z_-]+ ]]
             then
-            select choice in Numbers "alphabet letters" AlphaNumeric
+            select choice in Numbers "string" AlphaNumeric
             do
                 case $choice in 
                 Numbers)
                     record+=":Numbers"
                     break
                 ;;
-                "alphabet letters")
-                    record+=":alphabet letters"
+                "string")
+                    record+=":string"
                     break;
                 ;;
                 AlphaNumeric)
