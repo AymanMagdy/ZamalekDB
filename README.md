@@ -1,10 +1,10 @@
 ## ZamalekDB-Engine
 
 ## Table of contents
-* [About the project](https://github.com/AymanMagdy/ZamalekDB-Engine/edit/master/README.md#about-the-project)
-* [Getting started](https://github.com/AymanMagdy/ZamalekDB-Engine/edit/master/README.md#start)
-  * [Installation](https://github.com/AymanMagdy/ZamalekDB-Engine/edit/master/README.md#installation)
-* [Contributors](https://github.com/AymanMagdy/ZamalekDB-Engine/edit/master/README.md#contributors)
+* [About the project](#about-the-project)
+* [Getting started](#getting-started)
+  * [Installation](#installation)
+* [Contributors](#contributors)
 
 
 ## About the project
