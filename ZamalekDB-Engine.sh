@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if [[ -d data ]]
+then 
+mkdir data
+fi
+
 source ./Color-Variables.sh 
 
 function Main-Menu {
