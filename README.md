@@ -30,7 +30,7 @@ $ ./ZamalekDB-Engine
 ```
 
 ## Contributors
-Ayman Magdy: https://github.com/AymanMagdy
+Ayman Magdy: https://github.com/AymanMagdy <br>
 Mina Maher: https://github.com/MinaMaher0
 
 ## License
