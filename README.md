@@ -24,10 +24,10 @@ Project is created with:
 $ git clone https://github.com/AymanMagdy/ZamalekDB-Engine.git
 `
 After you clone the prject follow the next stept:
-``
+```
 $ cd ZamalekDB-Engine
 $ ./ZamalekDB-Engine
-``
+```
 
 ## Contributors
 https://github.com/MinaMaher0
