@@ -1,10 +1,10 @@
 ## ZamalekDB-Engine
 
 ## Table of contents
-* [About the project](#general-info)
-* [Getting started](#start)
-  * [Installation](#nstallation)
-* [Contributors](#contributors)
+* [About the project](https://github.com/AymanMagdy/ZamalekDB-Engine/edit/master/README.md#about-the-project)
+* [Getting started](https://github.com/AymanMagdy/ZamalekDB-Engine/edit/master/README.md#start)
+  * [Installation](https://github.com/AymanMagdy/ZamalekDB-Engine/edit/master/README.md#installation)
+* [Contributors](https://github.com/AymanMagdy/ZamalekDB-Engine/edit/master/README.md#contributors)
 
 
 ## About the project
@@ -23,7 +23,7 @@ Project is created with:
 ```
 $ git clone https://github.com/AymanMagdy/ZamalekDB-Engine.git
 ```
-After you clone the prject follow the next stept:
+After you clone the prject follow the next steps:
 ```
 $ cd ZamalekDB-Engine
 $ ./ZamalekDB-Engine
@@ -31,4 +31,8 @@ $ ./ZamalekDB-Engine
 
 ## Contributors
 https://github.com/MinaMaher0
+
+## License
+Distributed under the GPL-3.0 License. See LICENSE for more information.
+
 
