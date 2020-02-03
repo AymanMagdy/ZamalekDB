@@ -8,23 +8,27 @@
 
 
 ## About the project
-This project is simple Lorem ipsum dolor generator.
+ZamalekDB-Engine allows the user to:
+
+* Creat databases.
+* List existing databases
+* Use database and start to use the DML (Data Manipulation Language) general queries.
+* Drop databse.
 	
 ## Getting started
 Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
+* Bash Scripting.
 
 ## Installation
-Here is to write the steps of installing the repo and start to use it.
+`
+$ git clone https://github.com/AymanMagdy/ZamalekDB-Engine.git
+`
+After you clone the prject follow the next stept:
+``
+$ cd ZamalekDB-Engine
+$ ./ZamalekDB-Engine
+``
 
 ## Contributors
-
 https://github.com/MinaMaher0
 
-```
-$ cd ../lorem
-$ npm install
-$ npm start
-```
