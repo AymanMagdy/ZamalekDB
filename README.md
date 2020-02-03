@@ -30,7 +30,8 @@ $ ./ZamalekDB-Engine
 ```
 
 ## Contributors
-https://github.com/MinaMaher0
+Ayman Magdy: https://github.com/AymanMagdy
+Mina Maher: https://github.com/MinaMaher0
 
 ## License
 Distributed under the GPL-3.0 License. See LICENSE for more information.
