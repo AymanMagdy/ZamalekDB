@@ -2,8 +2,6 @@
 
 source ./Color-Variables.sh 
 
-
-
 function Main-Menu {
     currentDB=""
     PS3="${yellow}Enter Your Choice : ${reset}"

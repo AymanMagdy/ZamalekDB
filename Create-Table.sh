@@ -21,6 +21,24 @@ function createColumns {
         for (( i=0;i<$colNum;++i )){
             echo "${yellow}Enter Column Name : ${reset}"
             read colName
+
+            typeset -i j
+            isColRepeated="0";
+            for (( j=0;j<$i;++j ))
+            do 
+                if [[ $(echo ${colArr[$j]} | cut -f1 -d :) == $colName ]]
+                then 
+                    isColRepeated="1"
+                fi
+            done
+            if [[ $isColRepeated == "1" ]]
+            then 
+                echo "${red}Column Name can't Repeated"
+                echo "Please renter column name${reset}"
+                i=$(( $i-1 ))
+                continue
+            fi
+
             record=""
             record+=$colName
             if [[ $colName =~ [a-zA-Z_-]+ ]]
