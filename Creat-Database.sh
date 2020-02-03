@@ -3,7 +3,7 @@
 source ./Color-Variables.sh 
 
 function creatDatabase () {
-    echo "Enter the database name, please!"
+    echo -e "\n${yellow}Enter the database name, please!${reset}"
     read databaseName;
     case $databaseName in 
     *[A-Za-z])
@@ -11,13 +11,15 @@ function creatDatabase () {
         if [ $? -eq 0 ] 
         then 
             mkdir data/$databaseName/tables data/$databaseName/meta-data
-            echo "The database '$databaseName' has been created."
+            echo -e "\n${green}The database '$databaseName' has been created.${reset}\n"
         else 
-            echo "${red}The database '${databaseName}'' already exists.${reset}"
+            echo -e "\n${red}Couldn't create Database"
+            echo -e "The database ${blue}${databaseName}${red} already exists.${reset}\n"
         fi
         ;;
     *)
-        echo "${red}The name you entered is not a proper name for a database.${reset}"
+        echo -e "\n${red}Couldn't create Database"
+        echo -e "The name you entered is not a proper name for a database.${reset}\n"
         ;;
     esac
 }

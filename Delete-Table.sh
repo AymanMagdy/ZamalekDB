@@ -1,17 +1,19 @@
 #!/bin/bash
-
-select choice in `ls data/$currentDB` "return to main menu"
+echo "${cyan}"
+select choice in `ls data/$currentDB/tables/` "return to main menu"
 do 
-    if [[ $choice =~ [a-zA-Z]+ && -d data/$currentDB/$choice ]]
+    echo "${reset}"
+    if [[ $choice =~ [a-zA-Z]+ && -f data/$currentDB/tables/$choice ]]
     then 
-        rm data/$currentDB/tables/$choice  
-        rm data/$currentDB/meta-data/$choice  
-        echo "${blue}$choice${green} deleted successfully${reset}" 
+        rm data/$currentDB/tables/$choice
+        rm data/$currentDB/meta-data/$choice.md
+        echo -e "\n${blue}$choice${green} deleted successfully${reset}\n" 
         return 
-    elif [[ $choice =~ [a-zA-Z]+ ]]
+    elif [[ $choice =~ [a-zA-Z]+ && $choice == "return to main menu" ]]
     then 
+        echo -e "\n"
         return
     else
-        echo "${red}Not Found${reset}"
+        echo -e "\n${red}Not Found${reset}\n"
     fi
 done

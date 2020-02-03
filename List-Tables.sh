@@ -3,12 +3,12 @@
 source ./Color-Variables.sh 
 
 function listTables () {
-    if [ -d data/$currentDB ]
-    then 
-        ls data/$currentDB/tables
-    else 
-        echo "The database -> '${currentDB}' does not exist."
-    fi
+    echo -e "\n====== ${yellow}Tables${reset} ======\n"
+    for f in `ls data/$currentDB/tables`
+    do 
+        echo "- "$f
+    done
+    echo -e "\n=======================\n"
 }
 
 listTables

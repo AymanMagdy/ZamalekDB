@@ -9,36 +9,74 @@ function InsertData () {
     do 
         colName=$(awk -v i="$i" -F: '{if(NR == i+1) print $1}' data/$currentDB/meta-data/$currentTB.md)
         dataType=$(awk -v i="$i" -F: '{if(NR == i+1) print $2}' data/$currentDB/meta-data/$currentTB.md)
-
-        echo "Enter the ${colName}"
+        isPK=$(awk -v i="$i" -F: '{if(NR == i+1) print $3}' data/$currentDB/meta-data/$currentTB.md)
+        echo "${yellow}Enter the ${colName}${reset}"
         read colValue;
-
         if [ ${dataType} == "Numbers" ]
         then 
             case $colValue in 
-            +([0-9]))
-                $data
+            +([0-9]) )
+                if [[ $isPK == "1" ]]
+                then
+                    
+                    isRepeated=$(awk -v fieledNum=$(( $i+1 )) -v newCellValue=$colValue 'BEGIN {flag=0 ; FS= ":"}; {if($fieledNum == newCellValue){ flag=1}} END {print flag}' data/$currentDB/tables/$currentTB)
+                    if [[ $isRepeated == "1" ]]
+                    then
+                        i=$(( $i-1 ))
+                        echo "${red}The id should be unique${reset}"
+                        continue
+                    fi
+                fi
+                if [ $i -gt 0 ]
+                then 
+                    data+=":"
+                fi
                 data+=$colValue;
                 ;;
             *)
-                echo "The id should be integer"
+                i=$(( $i-1 ))
+                echo "${red}The id should be integer${reset}"
+                continue
                 ;;
             esac
-        elif [ ${dataType} == "" ]
+        elif [ ${dataType} == "string" ]
         then 
-            if [ $i -gt 0 ]
-            then 
-                data+=":"
-            fi
             case $colValue in 
-            +([a-zA-Z]))
+            +([a-zA-Z]) )
+                if [[ $isPK == "1" ]]
+                then
+                    
+                    isRepeated=$(awk -v fieledNum=$(( $i+1 )) -v newCellValue=$colValue 'BEGIN {flag=0 ; FS= ":"}; {if($fieledNum == newCellValue){ flag=1}} END {print flag}' data/$currentDB/tables/$currentTB)
+                    if [[ $isRepeated == "1" ]]
+                    then
+                        i=$(( $i-1 ))
+                        echo "${red}The id should be unique${reset}"
+                        continue
+                    fi
+                fi
+                if [ $i -gt 0 ]
+                then 
+                    data+=":"
+                fi
                 data+=$colValue;
                 ;;
             *)
-                echo "The value should be string"
+                i=$(( $i-1 ))
+                echo "${red}The value should be string${reset}"
+                continue
                 ;;
             esac
         else
+            if [[ $isPK == "1" ]]
+                then                   
+                    isRepeated=$(awk -v fieledNum=$(( $i+1 )) -v newCellValue=$colValue 'BEGIN {flag=0 ; FS= ":"}; {if($fieledNum == newCellValue){ flag=1}} END {print flag}' data/$currentDB/tables/$currentTB)
+                    if [[ $isRepeated == "1" ]]
+                    then
+                        i=$(( $i-1 ))
+                        echo "${red}The id should be unique${reset}"
+                        continue
+                fi
+            fi
             if [ $i -gt 0 ]
             then 
                 data+=":"
@@ -47,7 +85,7 @@ function InsertData () {
         fi
     done
     echo $data >> data/$currentDB/tables/$currentTB
-    echo "Done adding the data to table '${currentTB}'"
+    echo "${green}Done adding the data to table '${currentTB}'${reset}"
 }
 
 InsertData

@@ -14,8 +14,8 @@ function Update-Table () {
        primaryKeyFieledType=`awk -F: '{if ($3==1) print $2;}' data/$currentDB/meta-data/$currentTB.md `
        primary=`awk -F: '{if ($3==1) print $3;}' data/$currentDB/meta-data/$currentTB.md` 
          
-        echo "The PK is with the $primaryKeyFieledName"
-        echo "Enter the $primaryKeyFieledName"
+        echo "${yellow}The PK is with the ${blue}$primaryKeyFieledName${reset}"
+        echo "${yellow}Enter the $primaryKeyFieledName${reset}"
         found=""
         read pkValue
         found+=$(awk -v fieledNum=$primaryKeyFieledNum -v pkValue=$pkValue 'BEGIN {flag=0 ; FS= ":"}; {if($fieledNum == pkValue) flag=1} END {print flag}' data/$currentDB/tables/$currentTB)
@@ -27,11 +27,13 @@ function Update-Table () {
                 temp=$(echo ${arrayMeta[$i]} | cut -f1 -d :)
                 echo $(($i+1)) ")" $temp
             done
-            echo "Enter the column you want to modify, please!"
+            echo "${yellow}Enter the column you want to modify, please!${reset}"
             read modify;
+            
             if [[ $modify =~ [1-9]+ && $modify -gt 0 && $modify -le ${#arrayMeta[@]} ]]
-            then 
-                echo "Enter the new " $(echo ${arrayMeta[$(($modify-1))]} | cut -f1 -d :)
+            then
+
+                echo "${yellow}Enter the new ${blue}" $(echo ${arrayMeta[$(($modify-1))]} | cut -f1 -d :) "${reset}"
                 read newCellValue
                 isRepeated="0"
                 if [ $modify == $primaryKeyFieledNum ]
@@ -41,27 +43,28 @@ function Update-Table () {
                 if [ $isRepeated -eq "0" ]
                 then  
                     dataType=$(awk -F: -v colNum=$modify '{if (NR==colNum) print $2;}' data/$currentDB/meta-data/$currentTB.md)
-                    echo "Data type: ${dataType}"
                     if [ ${dataType} == "Numbers" ]
                     then 
                         case $newCellValue in 
-                        +([0-9]))
+                        +([0-9]) )
                             awk -v rowNumber="$rowNumToBeEdited" -v colNumber="$modify" -v newData="$newCellValue" -F: 'BEGIN{OFS = ":"}{if(NR == rowNumber){$colNumber = newData};print $0;}' data/$currentDB/tables/$currentTB >> data/$currentDB/tables/tempTable;
                             mv data/$currentDB/tables/tempTable data/$currentDB/tables/$currentTB
                             ;;
                         *)
-                            echo "The id should be integer"
+                            echo "${red}Couldn't Modify"
+                            echo "${red}The $(echo ${arrayMeta[$(($modify-1))]} | cut -f1 -d :) should be integer${reset}"
                             ;;
                         esac
                     elif [ ${dataType} == "string" ]
                     then 
                         case $newCellValue in 
-                            +([a-zA-Z]))
+                            +([a-zA-Z]) )
                                 awk -v rowNumber="$rowNumToBeEdited" -v colNumber="$modify" -v newData="$newCellValue" -F: 'BEGIN{OFS = ":"}{if(NR == rowNumber){$colNumber = newData};print $0;}' data/$currentDB/tables/$currentTB >> data/$currentDB/tables/tempTable;
                                 mv data/$currentDB/tables/tempTable data/$currentDB/tables/$currentTB
                                 ;;
                             *)
-                                echo "The id should be String"
+                                echo  "${red}Couldn't Modify"
+                                echo "${red}The $(echo ${arrayMeta[$(($modify-1))]} | cut -f1 -d :) should be String${reset}"
                                 ;;
                             esac
                     else 
@@ -69,12 +72,17 @@ function Update-Table () {
                         mv data/$currentDB/tables/tempTable data/$currentDB/tables/$currentTB
                     fi
                 else
-                    echo "Invalid selection"
+                    echo  "${red}Couldn't Modify"
+                    echo "${red}$(echo ${arrayMeta[$(($modify-1))]} | cut -f1 -d :) Must be unique${reset}"
                 fi
 
             else
-                echo "You entered a repeated PK"
+                echo  "${red}Couldn't Modify"
+                echo "${red}You entered a repeated PK${reset}"
             fi
+        else 
+            echo  "${red}Couldn't Modify"
+            echo "${red}$pkValue NOT Found${reset}"
         fi
         break
     done

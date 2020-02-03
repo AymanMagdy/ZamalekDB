@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo "${cyan}"
 select choice in `ls data/$currentDB/tables/`
 do
      if [[ $choice =~ [a-zA-Z]+ && -f data/$currentDB/tables/$choice ]]
@@ -14,3 +14,4 @@ do
             echo "${red}Not Found${reset}"
     fi
 done
+echo "${reset}"
