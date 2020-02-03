@@ -16,7 +16,7 @@ ZamalekDB-Engine allows the user to:
 * Drop databse.
 	
 ## Getting started
-Project is created with:
+Project was created with:
 * Bash Scripting.
 
 ## Installation
